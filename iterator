@@ -1,0 +1,15 @@
+'''
+1. Para listar as marcas use a URL:  https://parallelum.com.br/fipe/api/v1/carros/marcas dessa forma serão listadas todas as marcas que a API possui.
+Escolha uma para ser usada na próxima etapa, grave o ID dela para ser usado no seu código.
+
+2. Nesta etapa use a marca selecionada para poder retornar os veículos que essa marca possui usando
+a URL: https://parallelum.com.br/fipe/api/v1/carros/marcas/{ID_MARCASELECIONADA}/modelos.
+
+3. Ao chamar esse endpoint, será retornada uma resposta que possui um nó, no formato JSON, com os modelos dos veículos que ela possui.
+Seu interator deverá inteirar em cada um desses modelos e trazer informações do nome e ID do veículo da marca selecionada.
+
+OBS: Ao usar a biblioteca de requests é necessário criar um header com o User-agent setado com algum valor.
+É um pré-requisito da API que será usada. Exemplo de headers: headers = {'user-agent': 'MyStudyApp'}.
+Essa atividade possui um grau de dificuldade um pouco maior e será necessário pesquisar
+como usar a biblioteca de JSON (que já vem com a linguagem) e as requests (necessário instalar).
+'''
