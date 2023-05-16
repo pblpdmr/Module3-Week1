@@ -1,0 +1,82 @@
+import requests
+
+# Saving the url and the user-agent in provisonal variables:
+url = "https://parallelum.com.br/fipe/api/v1/carros/marcas"
+headers = {"User-Agent":"MyStudyApp"}
+
+# Getting the content data da API with "get":
+response = requests.get(url, headers=headers)
+
+# Saving a response da API in variable brand in JSON format:
+marcas = response.json()
+
+# Getting the type of our variable:
+type(marcas) 
+
+#Getting the information of the list 'marca' in order trought a for method:
+for marca in marcas:
+    print("Marca:", marca["nome"], "Código:", marca["codigo"])
+		
+# Saving the url that have the code that returns all the cars that our brand contains
+# in a variable with the car code that we going to use, in this case will be 189:
+url_carros= "https://parallelum.com.br/fipe/api/v1/carros/marcas/189/modelos"
+
+# Getting the content data da API with "get". (We don´t create a headers user because it is already create upside):
+response = requests.get(url_carros, headers=headers)
+
+# Saving a response da API in variable cars in JSON format:
+carros = response.json()
+
+# Getting the type of our new variable to get the data from its:
+type(carros)
+
+#Getting the content of our dict:
+carros.keys()
+
+# Obtaining the data that we want:
+carros['modelos']
+
+'''Now is the turn to use a iterator class and manipule the data that we get from the API:'''
+
+#Class that manipule a dict's list
+
+class Iterator:
+
+    def __init__ (self, id_value: str):
+        #Constructor code with the argument id_value: str that is a dict position structure wich refer to the dict data order.
+
+        # Saving the url that have the code that returns all the cars contains in our select brand:
+        url = "https://parallelum.com.br/fipe/api/v1/carros/marcas/{}/modelos"
+        url = url.format(id_value)
+        headers = {"User-Agent":"MyStudyApp"}
+        
+        # Getting the content data da API with "get":
+        response = requests.get(url_carros, headers=headers)
+
+        # Saving the API response in variable cars with .JSON format:
+        carros = response.json()
+
+        #Gettin the values for the dict 'modelos':
+        self.modelos = carros['modelos']
+
+        # Limiting the inicial and final state:
+        self.current = 0
+        self.end = len(self.modelos)
+
+    def __iter__(self):
+        # Iterating code that oper over each element of the object:
+				return self
+
+    def __next__(self):
+        # Conditional loop that will stop our operation till there is not more elements to iter:
+				if self.current >= self.end:
+            raise StopIteration
+        # Statement that let the operation flow till its arrive at end:
+				result = self.modelos[self.current]
+        self.current += 1
+        return result
+
+# Saving in a variable and use our iterator class:
+modelos = Iterator("189")
+for modelo in modelos:
+    print(modelo)
