@@ -77,6 +77,6 @@ class Iterator:
         return result
 
 # Saving in a variable and use our iterator class:
-modelos = Iterator("189")
+modelos = Iterator("6")
 for modelo in modelos:
     print(modelo)
